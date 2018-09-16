@@ -11,6 +11,8 @@ import ClubScreen from './screens/ClubScreen';
 import PlayerScreen from './screens/PlayerScreen';
 import PlayerDetailsComponent from './components/PlayerDetailsComponent';
 import ClubDetailsComponent from './components/ClubDetailsComponent';
+import MatchDetailsComponent from './components/MatchDetailsComponent';
+import AboutComponent from './components/AboutComponent';
 
 const HomeStack = createStackNavigator({
     Home: { 
@@ -34,6 +36,20 @@ const HomeStack = createStackNavigator({
       screen: FixtureScreen,
       navigationOptions: {
         title: 'EPL Fixtures',
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        tabBarVisible: true,
+      },
+     },
+     MatchDetails: { 
+      screen: MatchDetailsComponent,
+      navigationOptions: {
+        title: 'Match Details',
         headerStyle: {
           backgroundColor: '#f4511e',
         },
@@ -144,6 +160,21 @@ const HomeStack = createStackNavigator({
         screen: ClubDetailsComponent,
         navigationOptions: {
             title: 'Club Info',
+            headerStyle: {
+            backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+            fontWeight: 'bold',
+            },
+            tabBarVisible: true,
+        },
+    
+    },
+    About: { 
+        screen: AboutComponent,
+        navigationOptions: {
+            title: 'About',
             headerStyle: {
             backgroundColor: '#f4511e',
             },

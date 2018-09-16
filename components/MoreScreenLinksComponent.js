@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Header , List, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons';
 
 const list = [
     {
       title: 'Players',
-      icon: 'user',
+      icon: 'users',
       type: 'entypo',
       navigte: 'Player'
     },
@@ -44,14 +44,15 @@ export default class MoreScreenLinksComponent extends React.Component {
             
             {
                 list.map((item, i) => (
-                <ListItem
-                    key={i}
-                    title={item.title}
-                    leftIcon={
-                      {name: item.icon, type: item.type, style: { color: 'red' }}
-                    }
-                    onPress={() => this.props.navigation.navigate(item.navigte)}
-                />
+                <TouchableOpacity key={i}>
+                  <ListItem
+                      title={item.title}
+                      leftIcon={
+                        {name: item.icon, type: item.type, style: { color: 'red' }}
+                      }
+                      onPress={() => this.props.navigation.navigate(item.navigte)}
+                  />
+                </TouchableOpacity>
                 ))
             }
         </View>

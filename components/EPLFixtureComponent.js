@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Linking, TouchableOpacity } from 'react-native';
-import { List, ListItem, Card } from 'react-native-elements';
+import { List, ListItem, Card, Icon } from 'react-native-elements';
+//import Icon from 'react-native-vector-icons/Entypo';
 import globalVar from '../config';
 
 export default class EPLFixtureComponent extends React.Component {
@@ -9,26 +10,24 @@ export default class EPLFixtureComponent extends React.Component {
         super(props);
         this.state = { 
             isLoading: true,
-            newsList: []
+            fixtureList: []
         };
       }
 
     componentDidMount() {
-        this.fetchSportsNews();
+        this.fetchEPLFixtures();
     }
 
-    fetchSportsNews() {
-        let term = encodeURIComponent('epl');
-        let urlPath = globalVar.NewsUrl  + "v2/top-headlines?category=sports&q="+term+"&page=1&pageSize=40";
-        var config = { headers: { Authorization: `Bearer ${globalVar.NewsApiKey}` } };
+    fetchEPLFixtures() {
+        let urlPath = globalVar.EPLFixtureJson;
 
-        fetch(urlPath,config)
+        fetch(urlPath)
         .then((response) => response.json())
         .then((responseJson) => {
             //alert(JSON.stringify(responseJson.articles));
             this.setState({
                 isLoading: false,
-                newsList: responseJson.articles,
+                fixtureList: responseJson.season_fixtures,
             }, function(){
 
             });
@@ -54,16 +53,47 @@ export default class EPLFixtureComponent extends React.Component {
       return (
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
         {
-            this.state.newsList.map((item, i) => (
-                <TouchableOpacity onPress={ ()=>{ Linking.openURL(item.url)}} key={i}>
-                    <Card
-                        title={item.title}
-                        image={{uri:item.urlToImage}}>
-                        <Text style={{marginBottom: 10}}>
-                            {item.description}
-                        </Text>
-                    </Card>
-                </TouchableOpacity>
+            this.state.fixtureList.map((fxtr, i) => (
+                <Card
+                    title={`Match Week ${fxtr.matchday}`}
+                    key={i}>
+                        {
+                        fxtr.fixtures.map((item, j) => (
+                            <TouchableOpacity key={j}
+                                onPress={() => {
+                                this.props.navigation.navigate('MatchDetails', {
+                                    match: item
+                                });
+                                }}>
+                                <ListItem
+                                    title={
+                                        <View style={styles.viewIconTextFlexJustifyCenter}>
+                                            <Icon name='sports-club' type='entypo' color='red' />
+                                            <Text  style={styles.text}>
+                                                {item.home_team_code} 
+                                            </Text>
+                                            <Text style={styles.text}>
+                                                {item.status === 'FT' ? item.full_time_score !==null ? item.full_time_score : '-' : item.half_time_score !== null ? item.half_time_score : '-'}
+                                            </Text>
+                                            <Text style={styles.text}>
+                                                {item.away_team_code}
+                                            </Text>
+                                            <Icon name='sports-club' type='entypo' color='red' />
+                                        </View>
+                                    }
+                                    subtitle={
+                                        <View style={styles.viewIconTextFlexJustifyStart}>
+                                            <Icon name='calendar' type='entypo' color='red' />
+                                            <Text style={styles.text}>{item.date}</Text>
+                                            <Icon name='location' type='entypo' color='red' />
+                                            <Text style={styles.text}>{item.venue}</Text>
+                                        </View>
+                                    }
+                                />
+                            </TouchableOpacity>
+                        ))
+                        }
+                </Card>
             ))
         }
         </ScrollView>
@@ -75,5 +105,23 @@ export default class EPLFixtureComponent extends React.Component {
     
     main: {
         flex: 1   
+    },
+    viewIconTextFlexJustifyStart: {
+        padding: 10,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+      },
+      viewIconTextFlexJustifyCenter: {
+          padding: 10,
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center'
+        },
+    text: {
+       paddingLeft: 5,
+       paddingRight: 5 
     }
   })

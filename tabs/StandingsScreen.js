@@ -1,19 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import StandingsScreenComponent from '../components/StandingsScreenComponent';
 
 
 export default class StandingsScreen extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
     render() {
       return (
-        <View style={styles.container}>
-          <Text>Standing</Text>
-        </View>
+        <StandingsScreenComponent />
       );
     }
   }
-
-  const styles = StyleSheet.create({
-    container: {
-        flex: 1, justifyContent: 'center', alignItems: 'center'
-    },
-  });

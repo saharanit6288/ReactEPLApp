@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Header } from 'react-native-elements';
 import HomeEPLNewsComponent from '../components/HomeEPLNewsComponent';
-
-const title = 'EPL Top Headlines';
+import EPLFixtureJsonStorageComponent from '../components/EPLFixtureJsonStorageComponent';
 
 export default class HomeScreen extends React.Component {
   constructor(props){
@@ -13,8 +12,8 @@ export default class HomeScreen extends React.Component {
     render() {
       return (
         <View>
-          
           <HomeEPLNewsComponent />
+          {/* <EPLFixtureJsonStorageComponent /> */}
         </View>
       );
     }

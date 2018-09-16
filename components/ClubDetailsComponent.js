@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Linking, TouchableOpacity } from 'react-native';
-import { List, ListItem, Card } from 'react-native-elements';
+import { List, ListItem, Card, Icon } from 'react-native-elements';
+//import Icon from 'react-native-vector-icons/Entypo';
 import globalVar from '../config';
 
 
@@ -57,31 +58,44 @@ export default class ClubDetailsComponent extends React.Component {
       return (
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Card title={this.state.clubInfo.name}>
-            <View>
-                <Text h3>{`Manager: ${this.state.clubInfo.manager} (${this.state.clubInfo.manager_nationality})`}</Text>
+            <View style={styles.viewIconText}>
+                <Icon name='user' type='entypo' color='red' />
+                <Text  style={styles.text}>
+                    {`Manager: ${this.state.clubInfo.manager} (${this.state.clubInfo.manager_nationality})`}
+                </Text>
             </View>
-            <View>
-                <Text h3>{`Stadium: ${this.state.clubInfo.stadium} (${this.state.clubInfo.capacity} capacity)`}</Text>
+            <View style={styles.viewIconText}>
+                <Icon name='location' type='entypo' color='red' />
+                <Text  style={styles.text}>
+                    {`Stadium: ${this.state.clubInfo.stadium} (${this.state.clubInfo.capacity} capacity)`}
+                </Text>
             </View>
-            <View>
-                <Text h3>{`Next Game: ${this.state.clubInfo.next_fixture}`}</Text>
+        </Card>
+        <Card title='Next Match'>
+            <View style={styles.viewIconText}>
+                <Icon name='soccer-ball-o' type='font-awesome' color='red' />
+                <Text style={styles.text}>{this.state.clubInfo.next_fixture}</Text>
             </View>
-            <View>
-                <Text h3>Previous Games:</Text>
+        </Card>
+        <Card title='Previous Fixtures'>
                 {
                     this.state.clubInfo.previous_fixtures.map((prevFIxtr,i)=> {
                         const reslt = this.state.clubInfo.results[i];
                         return (
-                            <Text key={i}>{`${prevFIxtr} ${reslt}`}</Text>
+                            <View style={styles.viewIconText} key={i}>
+                                <Icon name='soccer-ball-o' type='font-awesome' color='red' />
+                                <Text style={styles.text}>{`${prevFIxtr} ${reslt}`}</Text>
+                            </View>
                         )
                     })
                 }
-            </View>
+        </Card>
+        <Card title='Form'>
             <View>
                 <Text h3>{`Form: ${this.state.clubInfo.form}`}</Text>
-                
             </View>
         </Card>
+        <Text style={{padding: 10, fontStyle: 'italic'}}>**Sources: https://github.com/drraq/PremierLeague.json</Text>
       </ScrollView>
       );
     }
@@ -91,5 +105,15 @@ export default class ClubDetailsComponent extends React.Component {
     
     main: {
         flex: 1   
+    },
+    viewIconText: {
+        padding: 10,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+      },
+    text: {
+       paddingLeft: 3 
     }
   })

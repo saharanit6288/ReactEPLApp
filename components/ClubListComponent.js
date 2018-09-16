@@ -54,18 +54,19 @@ export default class ClubListComponent extends React.Component {
         <List>
         {
           this.state.clubList.map((item, i) => (
-            <ListItem
-              key={i}
-              title={item.name}
-              subtitle={item.stadium}
-              leftIcon={{name: 'sports-club', type: 'entypo', style: { color: 'red' }}}
-              onPress={() => {
-                this.props.navigation.navigate('ClubDetails', {
-                  id: item.id
-                  //club: `${JSON.stringify(item)}`,
-                });
-              }}
-            />
+            <TouchableOpacity key={i}
+            onPress={() => {
+              this.props.navigation.navigate('ClubDetails', {
+                id: item.id
+                //club: `${JSON.stringify(item)}`,
+              });
+            }}>
+              <ListItem
+                title={item.name}
+                subtitle={item.stadium}
+                leftIcon={{name: 'sports-club', type: 'entypo', style: { color: 'red' }}}
+              />
+            </TouchableOpacity>
           ))
         }
       </List>

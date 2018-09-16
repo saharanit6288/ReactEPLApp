@@ -54,17 +54,18 @@ export default class PlayerListComponent extends React.Component {
         <List>
         {
           this.state.playerList.map((item, i) => (
-            <ListItem
-              key={i}
-              title={`${item.first_name} ${item.last_name}`}
-              subtitle={item.current_club}
-              leftIcon={{name: 'user', type: 'entypo', style: { color: 'red' }}}
-              onPress={() => {
-                this.props.navigation.navigate('PlayerDetails', {
-                  player: `${JSON.stringify(item)}`,
-                });
-              }}
-            />
+            <TouchableOpacity key={i}
+            onPress={() => {
+              this.props.navigation.navigate('PlayerDetails', {
+                player: item,
+              });
+            }}>
+              <ListItem
+                title={`${item.first_name} ${item.last_name}`}
+                subtitle={item.current_club}
+                leftIcon={{name: 'user', type: 'entypo', style: { color: 'red' }}}
+              />
+            </TouchableOpacity>
           ))
         }
       </List>

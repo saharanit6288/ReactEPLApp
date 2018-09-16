@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Linking, TouchableOpacity } from 'react-native';
 import { List, ListItem, Card } from 'react-native-elements';
 import globalVar from '../config';
+import Storage from '../Storage';
 
 
 export default class StadiumScreenComponent extends React.Component {
@@ -12,6 +13,16 @@ export default class StadiumScreenComponent extends React.Component {
             stadiumList: []
         };
       }
+
+    // async componentDidMount () {
+    //     let EPLFixtureJson = await Storage.getItem("EPLFixtureResponseJson");
+    //     alert(JSON.stringify(EPLFixtureJson));
+    //     this.setState({
+    //       isLoading: false,
+    //       stadiumList: EPLFixtureJson.stadiums 
+    //     });
+
+    // }
 
     componentDidMount() {
         this.fetchEPLStadiums();
@@ -54,11 +65,12 @@ export default class StadiumScreenComponent extends React.Component {
         <List>
         {
           this.state.stadiumList.map((item, i) => (
-            <ListItem
-              key={i}
-              title={item}
-              leftIcon={{name: 'location', type: 'entypo', style: { color: 'red' }}}
-            />
+            <TouchableOpacity key={i}>
+              <ListItem
+                title={item}
+                leftIcon={{name: 'location', type: 'entypo', style: { color: 'red' }}}
+              />
+            </TouchableOpacity>
           ))
         }
       </List>
