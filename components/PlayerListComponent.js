@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Linking, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Linking, TouchableOpacity, FlatList, SearchBar } from 'react-native';
 import { List, ListItem, Card } from 'react-native-elements';
 import globalVar from '../config';
 
@@ -12,6 +12,28 @@ export default class PlayerListComponent extends React.Component {
             playerList: []
         };
       }
+    
+    _keyExtractor = (item, index) => item.id.toString();
+
+    // renderHeader = () => {
+    //   return <SearchBar placeholder="Type Here..." lightTheme round />;
+    // };
+
+    renderFooter = () => {
+      if (!this.state.isLoading) return null;
+  
+      return (
+        <View
+          style={{
+            paddingVertical: 20,
+            borderTopWidth: 1,
+            borderColor: "#CED0CE"
+          }}
+        >
+          <ActivityIndicator animating size="large" />
+        </View>
+      );
+  };
 
     componentDidMount() {
         this.fetchEPLPlayers();
@@ -50,26 +72,29 @@ export default class PlayerListComponent extends React.Component {
 
 
       return (
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <List>
-        {
-          this.state.playerList.map((item, i) => (
-            <TouchableOpacity key={i}
-            onPress={() => {
-              this.props.navigation.navigate('PlayerDetails', {
-                player: item,
-              });
-            }}>
-              <ListItem
-                title={`${item.first_name} ${item.last_name}`}
-                subtitle={item.current_club}
-                leftIcon={{name: 'user', type: 'entypo', style: { color: 'red' }}}
-              />
-            </TouchableOpacity>
-          ))
-        }
-      </List>
-      </ScrollView>
+            <FlatList
+              data={this.state.playerList}
+              keyExtractor={this._keyExtractor}
+              ListHeaderComponent={this.renderHeader}
+              ListFooterComponent={this.renderFooter}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate('PlayerDetails', {
+                    player: item,
+                  });
+                }}>
+                  <ListItem
+                    title={`${item.first_name} ${item.last_name}`}
+                    subtitle={item.current_club}
+                    leftIcon={{name: 'user', type: 'entypo', style: { color: 'red' }}}
+                  />
+                </TouchableOpacity>
+              )}
+            />
+        </List>
+      
       );
     }
   }

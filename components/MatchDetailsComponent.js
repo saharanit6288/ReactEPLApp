@@ -48,31 +48,34 @@ export default class MatchDetailsComponent extends React.Component {
                     {this.state.match.away_team_goals !== null ? this.state.match.away_team_goals : ""}
                 </Text>
             </View>
-            <View style={styles.viewIconTextFlexJustifyCenter}>
+            <View style={{flexDirection:"row", justifyContent: 'center'}}>
+                <View style={{flex:1,justifyContent: 'flex-start', alignItems: 'flex-end'}}>
                 {
                     this.state.match.home_team_scorers.map((hmeGoalScr, i) => (
-                        <View style={styles.viewIconTextFlexJustifyStart} key={i}>
-                        <Text style={{flex:1,flexDirection:'column'}}>
+                        <Text key={i}>
                             {`${hmeGoalScr}`}
                         </Text>  
-                        </View>
                     ))
                 }
-                <Text style={styles.text}>{' '}</Text>
+                </View>
+                <View style={{flex:1}}>
+                    <Text></Text>
+                </View>
+                <View style={{flex:1,justifyContent: 'flex-start'}}>
                 {
                     this.state.match.away_team_scorers.map((awyGoalScr, i) => (
-                        <View style={styles.viewIconTextFlexJustifyStart} key={i}>
-                        <Text style={{flex:1,flexDirection:'column'}}>
+                        <Text key={i}>
                             {`${awyGoalScr}`}
                         </Text> 
-                        </View>
                     ))
                 }
+                </View>
             </View>
             <View
                 style={{
                     borderBottomColor: 'black',
                     borderBottomWidth: 1,
+                    padding: 10
                 }}
                 />
             <View style={styles.viewIconTextFlexJustifyStart}>

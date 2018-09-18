@@ -14,6 +14,7 @@ export default class EPLFixtureComponent extends React.Component {
         };
       }
 
+    
     componentDidMount() {
         this.fetchEPLFixtures();
     }
@@ -96,6 +97,7 @@ export default class EPLFixtureComponent extends React.Component {
                 </Card>
             ))
         }
+        <Text style={{padding: 10, fontStyle: 'italic'}}>**Sources: https://github.com/drraq/PremierLeague.json</Text>
         </ScrollView>
       );
     }
