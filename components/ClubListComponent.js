@@ -50,8 +50,7 @@ export default class ClubListComponent extends React.Component {
 
 
       return (
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <List>
+        <ScrollView contentContainerStyle={{flexGrow: 1, backgroundColor: '#fff'}}>
         {
           this.state.clubList.map((item, i) => (
             <TouchableOpacity key={i}
@@ -69,7 +68,6 @@ export default class ClubListComponent extends React.Component {
             </TouchableOpacity>
           ))
         }
-      </List>
       </ScrollView>
       );
     }

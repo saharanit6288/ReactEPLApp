@@ -61,8 +61,7 @@ export default class StadiumScreenComponent extends React.Component {
 
 
       return (
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <List>
+        <ScrollView contentContainerStyle={{flexGrow: 1, backgroundColor: '#fff'}}>
         {
           this.state.stadiumList.map((item, i) => (
             <TouchableOpacity key={i}>
@@ -73,7 +72,6 @@ export default class StadiumScreenComponent extends React.Component {
             </TouchableOpacity>
           ))
         }
-      </List>
       </ScrollView>
       );
     }
