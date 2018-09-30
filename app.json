@@ -1,5 +1,18 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name":"EPL 2018",
+    "icon":"./logo.png",
+    "description":"Get EPL 2018 week wise fixtures, results, standings, club details, player statistics",
+    "sdkVersion": "27.0.0",
+	"ios": {
+      "bundleIdentifier": "com.epl2018.myapp",
+       "versionCode":1 , 
+       "icon":"./logo.png"
+    },
+    "android":{
+      "package":"com.epl2018.myapp",
+       "versionCode":1 , 
+       "icon":"./logo.png"
+      }
   }
 }
