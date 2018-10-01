@@ -1,13 +1,11 @@
+Get EPL 2018 week wise fixtures, results, standings, club details, player statistics
+
 
 
 
 You can download this demo apk from below link:
 
 https://drive.google.com/file/d/15EgsI0yIjUBBAv_bY_LPLAroNOlmHDQ4/view?usp=sharing
-
-
-
-
 
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
